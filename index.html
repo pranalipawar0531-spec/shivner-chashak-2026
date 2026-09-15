@@ -160,10 +160,17 @@ button{
 }
 
 .pay-btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
     width:100%;
     background:#16a34a;
     color:white;
     margin-top:18px;
+    padding:13px 20px;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
 }
 
 .payment{
@@ -210,12 +217,14 @@ button{
 
 @media(max-width:750px){
     .header{
-        flex-direction:row;
+        flex-direction:column;
+        text-align:center;
+        gap:8px;
     }
 
     .logo{
-        width:80px;
-        height:80px;
+        width:90px;
+        height:90px;
     }
 
     .title h1{
@@ -298,36 +307,27 @@ button{
 <label>खेळाडू प्रकार :</label>
 
 <div class="radio-row">
-    <input type="radio" name="playerType" value="फलंदाज" required>
-    फलंदाज
+    <input type="radio" name="playerType" value="फलंदाज - उजवा" required>
+    फलंदाज - उजवा
 
-    <input type="radio" name="hand" value="उजवा" required>
-    उजवा
-
-    <input type="radio" name="hand" value="डावा">
-    डावा
+    <input type="radio" name="playerType" value="फलंदाज - डावा">
+    फलंदाज - डावा
 </div>
 
 <div class="radio-row">
-    <input type="radio" name="playerType" value="गोलंदाज">
-    गोलंदाज
+    <input type="radio" name="playerType" value="गोलंदाज - उजवा">
+    गोलंदाज - उजवा
 
-    <input type="radio" name="hand" value="उजवा">
-    उजवा
-
-    <input type="radio" name="hand" value="डावा">
-    डावा
+    <input type="radio" name="playerType" value="गोलंदाज - डावा">
+    गोलंदाज - डावा
 </div>
 
 <div class="radio-row">
-    <input type="radio" name="playerType" value="अष्टपैलू">
-    अष्टपैलू
+    <input type="radio" name="playerType" value="अष्टपैलू - उजवा">
+    अष्टपैलू - उजवा
 
-    <input type="radio" name="hand" value="उजवा">
-    उजवा
-
-    <input type="radio" name="hand" value="डावा">
-    डावा
+    <input type="radio" name="playerType" value="अष्टपैलू - डावा">
+    अष्टपैलू - डावा
 </div>
 <label>पासपोर्ट साईज फोटो :</label>
 
@@ -363,9 +363,421 @@ button{
 मी वरील नियम व अटी मान्य करतो/करते.
 </div>
 
-<button type="button" class="pay-btn" onclick="window.open('payment_qr.jpeg','blank')">
+<a href="payment_qr.jpeg" target="blank" class="pay-btn">
     ₹400 Payment साठी पुढे जा
+</a>
+
+<label>Payment UTR / Transaction ID :</label>
+<input type="text" id="paymentUTR"
+       placeholder="Payment केल्यानंतर UTR / Transaction ID टाका"
+       required>
+
+<button type="button" class="done-btn" onclick="verifyPayment()">
+     Payment Done
 </button>
+
+<button type="submit" id="submitBtn"disabled>
+     Submit Registration
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<script>
+function verifyPayment() {
+    const utr = document.getElementById("paymentUTR").value.trim();
+
+    if (utr === "") {
+        alert("कृपया Payment UTR / Transaction ID टाका.");
+        return;
+    }
+
+    document.getElementById("submitBtn").disabled = false;
+    alert("Payment details मिळाले. आता Registration Submit करू शकता.");
+}
+
+document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if (!document.getElementById("agree").checked) {
+        alert("कृपया नियम व अटी मान्य करा.");
+        return;
+    }
+
+    alert(" Registration Successful!");
+});
+</script>
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>शिवनेर चषक 2026</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Devanagari",sans-serif;
+    background:#f5f7fb;
+    color:#172b4d;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:15px;
+}
+
+/* HEADER */
+.header{
+    background:#fffdf5;
+    border:2px solid #d8b35a;
+    border-radius:15px;
+    padding:15px;
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.logo{
+    width:125px;
+    height:125px;
+    object-fit:contain;
+}
+
+.title{
+    flex:1;
+    text-align:center;
+}
+
+.title h1{
+    margin:0;
+    font-size:38px;
+    color:#123b78;
+}
+
+.title h2{
+    margin:8px 0;
+    font-size:27px;
+    color:#9b2020;
+}
+
+.parv{
+    font-size:19px;
+    font-weight:bold;
+    color:#222;
+}
+
+.form-title{
+    margin-top:18px;
+    background:#e8f3ff;
+    border-radius:10px;
+    padding:12px;
+    text-align:center;
+    font-size:27px;
+    font-weight:bold;
+    color:#123b78;
+}
+
+/* MAIN */
+.main{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:15px;
+    margin-top:15px;
+}
+
+.card{
+    background:white;
+    border:1px solid #c9d9eb;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 8px #00000012;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:13px;
+    margin-bottom:5px;
+}
+
+input,select{
+    width:100%;
+    padding:11px;
+    border:1px solid #b8cce2;
+    border-radius:7px;
+    font-size:15px;
+}
+
+.radio-row{
+    margin:9px 0;
+}
+
+.radio-row input{
+    width:auto;
+    margin-right:5px;
+}
+
+.photo-box{
+    border:2px dashed #abc8e8;
+    padding:20px;
+    text-align:center;
+    margin-top:8px;
+    border-radius:8px;
+}
+
+.rules{
+    margin-top:18px;
+    border:2px solid #d7a34b;
+    border-radius:10px;
+    padding:15px;
+    background:#fffdf7;
+}
+
+.rules h3{
+    text-align:center;
+    margin-top:0;
+    color:#743b00;
+}
+
+.rules li{
+    margin:7px 0;
+    line-height:1.5;
+}
+
+.agree{
+    margin-top:15px;
+}
+
+.agree input{
+    width:auto;
+}
+
+button{
+    border:0;
+    border-radius:8px;
+    padding:13px 20px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.pay-btn{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    width:100%;
+    background:#16a34a;
+    color:white;
+    margin-top:18px;
+    padding:13px 20px;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.payment{
+    text-align:center;
+}
+
+.payment h2{
+    background:#e9e1ff;
+    padding:12px;
+    border-radius:8px;
+    color:#351487;
+}
+
+.fee{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.qr{
+    width:190px;
+    height:190px;
+    margin:15px auto;
+    display:block;
+    border:8px solid white;
+    box-shadow:0 0 5px #777;
+}
+
+.payment-btn{
+    width:100%;
+    background:#16a34a;
+    color:white;
+}
+
+.success{
+    display:none;
+    margin-top:18px;
+    padding:25px;
+    text-align:center;
+    border:2px solid #54c477;
+    border-radius:10px;
+    background:#effff3;
+    color:#08752b;
+}
+
+@media(max-width:750px){
+    .header{
+        flex-direction:column;
+        text-align:center;
+        gap:8px;
+    }
+
+    .logo{
+        width:90px;
+        height:90px;
+    }
+
+    .title h1{
+        font-size:24px;
+    }
+
+    .title h2{
+        font-size:18px;
+    }
+
+    .parv{
+        font-size:13px;
+    }
+
+    .main{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<div class="header">
+
+    <img src="cricket_logo.jpeg" class="logo">
+
+    <div class="title">
+        <h1>
+            शिवनेर चषक 2026
+            <span class="parv">(पर्व 26 वे)</span>
+        </h1>
+
+        <h2>
+            जुन्नर चॅम्पियन्स लीग
+            <span class="parv">(पर्व 1 ले)</span>
+        </h2>
+    </div>
+
+</div>
+
+<div class="form-title">
+    * खेळाडू फॉर्म *
+</div>
+
+
+<div class="main">
+
+<!-- LEFT SIDE -->
+<div class="card">
+
+<form id="registrationForm">
+
+<label>खेळाडूचे पूर्ण नाव :</label>
+<input type="text" id="name" placeholder="पूर्ण नाव लिहा" required>
+
+<label>पत्ता :</label>
+<input type="text" id="address" placeholder="पत्ता लिहा" required>
+
+<label>आधार कार्ड नं :</label>
+<input type="text" id="aadhaar" placeholder="आधार कार्ड क्रमांक" maxlength="12" required>
+
+<label>गुगल पे / फोन पे नं :</label>
+<input type="tel" id="mobile" placeholder="मोबाईल नंबर / UPI नं" required>
+
+<label>टी-शर्ट साईज :</label>
+<select id="size" required>
+    <option value="">साईज निवडा</option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+    <option>XL</option>
+    <option>XXL</option>
+    <option>XXXL</option>
+</select>
+
+<label>खेळाडू प्रकार :</label>
+
+<div class="radio-row">
+    <input type="radio" name="playerType" value="फलंदाज - उजवा" required>
+    फलंदाज - उजवा
+
+    <input type="radio" name="playerType" value="फलंदाज - डावा">
+    फलंदाज - डावा
+</div>
+
+<div class="radio-row">
+    <input type="radio" name="playerType" value="गोलंदाज - उजवा">
+    गोलंदाज - उजवा
+
+    <input type="radio" name="playerType" value="गोलंदाज - डावा">
+    गोलंदाज - डावा
+</div>
+
+<div class="radio-row">
+    <input type="radio" name="playerType" value="अष्टपैलू - उजवा">
+    अष्टपैलू - उजवा
+
+    <input type="radio" name="playerType" value="अष्टपैलू - डावा">
+    अष्टपैलू - डावा
+</div>
+<label>पासपोर्ट साईज फोटो :</label>
+
+<input type="file" id="photo" accept="image/*" required>
+
+<hr>
+<hr>
+
+<!-- RULES -->
+<div class="rules">
+
+<h3>संघमालक व खेळाडूंसाठी नियम व अटी</h3>
+
+<ol>
+<li>प्रत्येक खेळाडूने फॉर्म भरणे आवश्यक आहे.</li>
+<li>फॉर्म फी ₹400/- रुपये आहे.</li>
+<li>प्रत्येक संघमालकास तीन खेळाडू चॉईस घेता येतील.</li>
+<li>चॉईस खेळाडूने देखील फॉर्म भरणे आवश्यक आहे.</li>
+<li>चॉईस खेळाडूने फॉर्म भरला नसेल तर त्या खेळाडूला खेळता येणार नाही.</li>
+<li>संघमालकाने 3 खेळाडू चॉईस घेतले असतील तर त्यानुसार ऑक्शनमध्ये निवड करता येईल.</li>
+<li>ऑक्शनमध्ये संघमालक व कर्णधार या दोघांनाही सहभाग घेता येईल.</li>
+<li>फॉर्म भरण्याची मुदत 16 सप्टेंबर 2026 ते 25 सप्टेंबर 2026 पर्यंत असेल.</li>
+<li>संघमालकाने आपल्या 3 चॉईस खेळाडूंची नावे 27 सप्टेंबर 2026 पर्यंत देणे बंधनकारक आहे.</li>
+<li>प्रत्येक संघ मर्यादित 13 खेळाडू असतील.</li>
+<li>स्पर्धेत निवड न झालेल्या खेळाडूंची संपूर्ण फॉर्म फी परत दिली जाईल.</li>
+<li>स्पर्धेसंदर्भातील सर्व निर्णय संयोजन कमिटी कडे राखीव राहतील.</li>
+</ol>
+
+</div>
+
+<div class="agree">
+<input type="checkbox" id="agree">
+मी वरील नियम व अटी मान्य करतो/करते.
+</div>
+
+<a href="payment_qr.jpeg" target="blank" class="pay-btn">
+    ₹400 Payment साठी पुढे जा
+</a>
 
 <label>Payment UTR / Transaction ID :</label>
 <input type="text" id="paymentUTR"
